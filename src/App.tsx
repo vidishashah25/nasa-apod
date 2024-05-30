@@ -1,12 +1,11 @@
 import './App.css'
+import NasaAPOD from './components/NasaAPOD'
 
 function App() {
 
   return (
     <>
-     <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+      <NasaAPOD/>
     </>
   )
 }
