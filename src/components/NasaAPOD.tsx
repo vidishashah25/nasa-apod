@@ -9,8 +9,7 @@ interface ApodDataInterface {
 }
 
 const NasaAPOD: React.FC = () => {
-  const API_KEY = "iX59Z8ovbOvqAcL2EwNDqqUd7dakD9PX91VG0Xpg";
-
+  const API_URL = import.meta.env.VITE_API_URL;
   const [apoData, setApoData] = useState<ApodDataInterface | null>(null);
   const [date, setDate] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,13 +23,13 @@ const NasaAPOD: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}${date ? `&date=${date}` : ''}`);
+      const response = await axios.get(`${API_URL}${date ? `&date=${date}` : ''}`);
       setApoData(response.data);
     } catch (error) {
       console.log("Error while fetching apodData for the specified date", error);
       setError('Failed to fetch data for the selected date. Displaying today\'s data instead.');
       try {
-        const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
+        const response = await axios.get(`${API_URL}`);
         setApoData(response.data);
         setError(null); 
       } catch (error) {
